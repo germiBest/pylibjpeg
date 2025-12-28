@@ -48,12 +48,16 @@ rle = [
 openjpeg = [
     "pylibjpeg-openjpeg"
 ]
+openjph = [
+    "pylibjpeg-openjph"
+]
 libjpeg = [
     "pylibjpeg-libjpeg"
 ]
 all = [
     "pylibjpeg-rle",
     "pylibjpeg-openjpeg",
+    "pylibjpeg-openjph",
     "pylibjpeg-libjpeg",
 ]
 

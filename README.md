@@ -20,10 +20,10 @@ pip install pylibjpeg
 
 ##### Installing extra requirements
 
-The package can be installed with extra requirements to enable support for JPEG (with `libjpeg`), JPEG 2000 (with `openjpeg`) and Run-Length Encoding (RLE) (with `rle`), respectively:
+The package can be installed with extra requirements to enable support for JPEG (with `libjpeg`), JPEG 2000 (with `openjpeg`), High-Throughput JPEG 2000 (with `openjph`) and Run-Length Encoding (RLE) (with `rle`), respectively:
 
 ```
-pip install pylibjpeg[libjpeg,openjpeg,rle]
+pip install pylibjpeg[libjpeg,openjpeg,openjph,rle]
 ```
 
 Or alternatively with just `all`:
@@ -50,7 +50,7 @@ you first have to install the corresponding package:
 |---                       |------ |---    |---                    |---      |---          |
 |JPEG, JPEG-LS and JPEG XT |Yes    |No     |[pylibjpeg-libjpeg][1] | GPLv3   |[libjpeg][2] |
 |JPEG 2000                 |Yes    |Yes    |[pylibjpeg-openjpeg][3]| MIT/BSD |[openjpeg][4]|
-|High-throughput JPEG 2000 |Yes    |No     |[pylibjpeg-openjpeg][3]| MIT/BSD |[openjpeg][4]|
+|High-throughput JPEG 2000 |Yes    |Yes    |[pylibjpeg-openjph][6] | MIT/BSD |[OpenJPH][7] |
 |RLE Lossless (PackBits)   |Yes    |Yes    |[pylibjpeg-rle][5]     | MIT     |-            |
 
 #### Supported DICOM Transfer Syntaxes
@@ -65,9 +65,9 @@ you first have to install the corresponding package:
 |1.2.840.10008.1.2.4.81 |JPEG-LS Lossy (Near-Lossless) Image Compression |[pylibjpeg-libjpeg][1] |
 |1.2.840.10008.1.2.4.90 |JPEG 2000 Image Compression (Lossless Only)     |[pylibjpeg-openjpeg][3]|
 |1.2.840.10008.1.2.4.91 |JPEG 2000 Image Compression                     |[pylibjpeg-openjpeg][3]|
-|1.2.840.10008.1.2.4.201|High-Throughput JPEG 2000 Image Compression (Lossless Only) |[pylibjpeg-openjpeg][3]|
-|1.2.840.10008.1.2.4.202|High-Throughput JPEG 2000 with RPCL Options Image Compression (Lossless Only) |[pylibjpeg-openjpeg][3]|
-|1.2.840.10008.1.2.4.203|High-Throughput JPEG 2000 Image Compression |[pylibjpeg-openjpeg][3]|
+|1.2.840.10008.1.2.4.201|High-Throughput JPEG 2000 Image Compression (Lossless Only) |[pylibjpeg-openjph][6]|
+|1.2.840.10008.1.2.4.202|High-Throughput JPEG 2000 with RPCL Options Image Compression (Lossless Only) |[pylibjpeg-openjph][6]|
+|1.2.840.10008.1.2.4.203|High-Throughput JPEG 2000 Image Compression |[pylibjpeg-openjph][6]|
 |1.2.840.10008.1.2.5    |RLE Lossless                                    |[pylibjpeg-rle][5]     |
 
 If you're not sure what the dataset's *Transfer Syntax UID* is, it can be
@@ -83,6 +83,8 @@ determined with:
 [3]: https://github.com/pydicom/pylibjpeg-openjpeg
 [4]: https://github.com/uclouvain/openjpeg
 [5]: https://github.com/pydicom/pylibjpeg-rle
+[6]: https://github.com/germiBest/pylibjpeg-openjph
+[7]: https://github.com/aous72/OpenJPH
 
 
 ### Usage
@@ -101,6 +103,10 @@ jpg_arr = ds.pixel_array
 # With the pylibjpeg-openjpeg plugin
 ds = dcmread(get_testdata_file('JPEG2000.dcm'))
 j2k_arr = ds.pixel_array
+
+# With the pylibjpeg-openjph plugin (HTJ2K)
+ds = dcmread(get_testdata_file('HTJ2K.dcm'))
+htj2k_arr = ds.pixel_array
 
 # With the pylibjpeg-rle plugin and pydicom v2.2+
 ds = dcmread(get_testdata_file('OBXXXX1A_rle.dcm'))
